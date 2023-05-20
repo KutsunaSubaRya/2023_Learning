@@ -1,10 +1,10 @@
 <?php
 
 // ******** update your personal settings ******** 
-$servername = "your_servername";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_dbname";
+$servername = "127.0.0.1";
+$username = "root";
+$password = "123456";
+$dbname = "db_final";
 
 // Connecting to and selecting a MySQL database
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,7 +26,7 @@ if (isset($_POST['StuName']) && isset($_POST['StuNum']) && isset($_POST['passwd'
 	$gender = $_POST['gender'];
 
 	
-	$insert_sql = "....";	// TODO
+	$insert_sql = "INSERT INTO `student` (`StuName`, `StuNum`, `passwd`, `gender`) VALUES ('$StuName', '$StuNum', '$passwd', '$gender')";
 	
 	if ($conn->query($insert_sql) === TRUE) {
 		echo "新增成功!!<br> <a href='index.php'>返回主頁</a>";
