@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 $id = $_GET['id'];
 
 if (isset($id)) {
-    $delete_sql = "DELETE FROM ....."; // TODO
+    $delete_sql = "DELETE FROM `student` WHERE `id` = $id"; // TODO
 
 	if ($conn->query($delete_sql) === TRUE) {
         echo "刪除成功!<a href='index.php'>返回主頁</a>";

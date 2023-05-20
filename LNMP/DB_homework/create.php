@@ -24,10 +24,8 @@ if (isset($_POST['StuName']) && isset($_POST['StuNum']) && isset($_POST['passwd'
 	$StuNum = $_POST['StuNum'];
 	$passwd = $_POST['passwd'];
 	$gender = $_POST['gender'];
-
 	
-	$insert_sql = "INSERT INTO `student` (`StuName`, `StuNum`, `passwd`, `gender`) VALUES ('$StuName', '$StuNum', '$passwd', '$gender')";
-	
+	$insert_sql = "INSERT INTO `student` (`StuName`, `StuNum`, `passwd`, `gender`) VALUES ('$StuName', $StuNum, $passwd, $gender)";	// TODO
 	if ($conn->query($insert_sql) === TRUE) {
 		echo "新增成功!!<br> <a href='index.php'>返回主頁</a>";
 	} else {
