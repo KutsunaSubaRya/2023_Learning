@@ -18,26 +18,68 @@
 			用該 id 去資料庫做搜尋，再把搜尋到的資料填入到html表單中。
 		
 		-->
-		<tr>
-		  <th>姓名</th>
-		  <td bgcolor="#FFFFFF"><input type="text" name="StuName" value="" /></td>
-		</tr>
-		 <tr>
-		  <th>學號 <input type="hidden" name="id" value="" /></th>
-		  <td bgcolor="#FFFFFF"><input type="text" name="StuNum" value="" /></td>
-		</tr>
-		<tr>
-		  <th>密碼</th>
-		  <td bgcolor="#FFFFFF"><input type="text" name="passwd" value="" /></td>
-		</tr>
-		<tr>
-		  <th>性別</th>
-			<td bgcolor='#FFFFFF'><input  type='radio' name='gender' value='1' checked>男 </input> <input type='radio' name='gender' value='0'>女 </input>
-		<tr>
-		  <th colspan="2"><input type="submit" value="更新"/></th>
-		</tr>
 
+		<?php
+			$servername = "127.0.0.1";
+			$username = "root";
+			$password = "123456";
+			$dbname = "db_final";
 
+            // Connect MySQL server
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            
+            // set up char set
+            if (!$conn->set_charset("utf8")) {
+                printf("Error loading character set utf8: %s\n", $conn->error);
+                exit();
+            }
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            } 
+			
+			$id = $_GET['id'];
+			$sql = "SELECT `StuName`, `StuNum`, `passwd`, `gender` FROM student WHERE `id` = $id"; // set up your sql query
+            $result = $conn->query($sql);	// Send SQL Query
+			$row = mysqli_fetch_array ( $result, MYSQLI_ASSOC);
+			
+			echo '<tr>';
+			echo '<th>ID</th>';
+			echo '<td bgcolor="#FFFFFF"><input type="text" name="id" value="' .$id. '" readonly/></td>';
+			echo '</tr>';
+
+			echo '<tr>';
+			echo '<th>姓名</th>';
+			echo '<td bgcolor="#FFFFFF"><input type="text" name="StuName" value="' .$row['StuName']. '" /></td>';
+			echo '</tr>';
+			
+			echo '<tr>';
+			echo '<th>學號 <input type="hidden" name="id" value="" /></th>';
+			echo '<td bgcolor="#FFFFFF"><input type="text" name="StuNum" value="' .$row['StuNum']. '" /></td>';
+			echo '</tr>';
+			
+			echo '<tr>';
+			echo '<th>密碼</th>';
+			echo '<td bgcolor="#FFFFFF"><input type="text" name="passwd" value="' .$row['passwd']. '" /></td>';
+			echo '</tr>';
+			
+			echo '<tr>';
+			echo '<th>性別</th>';
+			if ($row['gender'] == 1) { // gender = male
+				echo '<td bgcolor="#FFFFFF"><input type="radio" name="gender" value="1" checked>男 </input> <input type="radio" name="gender" value="0">女 </input></td>';
+			}
+			else { // gender = female
+				echo '<td bgcolor="#FFFFFF"><input type="radio" name="gender" value="1">男 </input> <input type="radio" name="gender" value="0" checked>女 </input></td>';
+			}
+			echo '</tr>';
+			
+			echo '<tr>';
+			echo '<th colspan="2"><input type="submit" value="更新"/></th>';
+			echo '</tr>';
+			//  pass id to doupdate.php
+			echo '<input type="hidden" name="id" value="' .$id. '" />';
+		?>
 	  </table>
 	</form>
 </body>

@@ -26,8 +26,8 @@ if (isset($_POST['StuName']) && isset($_POST['StuNum']) && isset($_POST['passwd'
 	$gender = $_POST['gender'];
 	$id = $_POST['id'];
 
-	$update_sql = "UPDATE ...."; // TODO
-	
+	$update_sql = "UPDATE `student` SET `StuName`= '$StuName',`StuNum`= $StuNum,`passwd`= $passwd,`gender`= $gender WHERE `id` = $id"; // TODO
+
 	if ($conn->query($update_sql) === TRUE) {
 		echo "修改成功!!<br> <a href='index.php'>返回主頁</a>";
 	} else {
