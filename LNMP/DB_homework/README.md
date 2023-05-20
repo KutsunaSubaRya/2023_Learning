@@ -2,6 +2,8 @@
 
 NTNU CSIE 113 蘇子權 SubaRya
 
+## Demo 影片
+* [DB php+sql homework demo](https://youtu.be/-6P3ASIaBSw)
 ## Tech Stack
 * LNMP (LEMP)
 
